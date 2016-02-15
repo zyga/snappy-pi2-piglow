@@ -13,4 +13,4 @@ clean:
 	rm -f piglow.o sn3218.o main.o piglow
 install: piglow
 	install --directory $(DESTDIR)$(bindir)
-	install -m 0755 piglow $(DESTDIR)$(bindir)
+	install --strip -m 0755 piglow $(DESTDIR)$(bindir)
