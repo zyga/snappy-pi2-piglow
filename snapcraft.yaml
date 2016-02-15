@@ -1,4 +1,4 @@
-name: pi2-piglow-demo
+name: pi2-piglow
 version: 1
 summary: Piglow Demo
 description: |
@@ -7,7 +7,7 @@ description: |
     It is expected to be used in tandem with the pi2-i2c snap from:
     https://github.com/zyga/snappy-pi2-i2c
 apps:
-    piglow:
+    demo:
         command: piglow
 parts:
     piglow:
