@@ -1,5 +1,7 @@
 CFLAGS += -Wall -O2
 prefix=/usr/local
+# NOTE: has to be /usr or snapcraft crashes
+prefix=/usr
 exec_prefix=$(prefix)
 bindir=$(exec_prefix)/bin
 all: piglow
