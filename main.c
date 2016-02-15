@@ -2,14 +2,23 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
+#include <signal.h>
 
 #include "piglow.h"
+
+sig_atomic_t shutdown = 0;
+
+void on_sigint(int signo) {
+    shutdown = 1;
+}
+
 
 int main(int argc, char **argv) {
     struct piglow glow;
     bool led[18];
     uint8_t pwm[18];
     int err;
+    signal(SIGINT, on_sigint);
     // TODO: learn about this through the snappy i2c skill.
     if ((err = piglow_open(&glow, "/dev/i2c-1"))) {
         fprintf(stderr, "Cannot open piglow: %s\n", strerror(err));
@@ -47,6 +56,8 @@ int main(int argc, char **argv) {
             goto fail;
         }
         usleep(200 * 1000);
+        if (shutdown)
+            goto out;
     }
     for (int i=0; i<18; ++i) {
         led[i] = false;
@@ -65,6 +76,8 @@ int main(int argc, char **argv) {
     }
     // Fade all LEDs together
     usleep(1 * 1000 * 1000);
+    if (shutdown)
+        goto out;
     printf("Breathing...\n");
     for (int loop=0; loop<6; ++loop) {
         for (int i=0; i<18; ++i)
@@ -86,8 +99,12 @@ int main(int argc, char **argv) {
                 goto fail;
             }
             usleep(2000);
+            if (shutdown)
+                goto out;
         }
         usleep(1000 * 1000);
+        if (shutdown)
+            goto out;
         for (int br=255; br>=0; --br) {
             for (int i=0; i<18; ++i)
                 pwm[i] = br;
@@ -101,9 +118,14 @@ int main(int argc, char **argv) {
                 goto fail;
             }
             usleep(2000);
+            if (shutdown)
+                goto out;
         }
         usleep(1000 * 1000);
+        if (shutdown)
+            goto out;
     }
+out:
     // Disable piglow
     printf("Powering piglow off\n");
     if ((err = piglow_powerctl(&glow, false))) {
