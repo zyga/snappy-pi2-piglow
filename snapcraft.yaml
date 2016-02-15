@@ -1,0 +1,18 @@
+name: pi2-piglow-demo
+version: 1
+summary: Piglow Demo
+description: |
+    This snap demonstrates the use of the snappy Ubuntu core skill system
+    to access and manipulate the "piglow" add-on board on a Raspberry Pi 2.
+    It is expected to be used in tandem with the pi2-i2c snap from:
+    https://github.com/zyga/snappy-pi2-i2c
+apps:
+    piglow:
+        command: piglow
+parts:
+    piglow:
+        plugin: make 
+        source: .
+# NOTE: currently disabled as it doesn't work with snapcraft 2.2.2
+# uses:
+#     i2c:
