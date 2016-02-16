@@ -1,6 +1,7 @@
 name: pi2-piglow
 version: 1
 summary: Piglow Demo
+architectures: [armhf]
 description: |
     This snap demonstrates the use of the snappy Ubuntu core skill system
     to access and manipulate the "piglow" add-on board on a Raspberry Pi 2.
