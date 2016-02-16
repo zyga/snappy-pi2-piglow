@@ -1,5 +1,5 @@
 name: pi2-piglow
-version: 1
+version: 2
 summary: Piglow Demo
 architectures: [armhf]
 description: |
