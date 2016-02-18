@@ -8,7 +8,7 @@ description: |
     It is expected to be used in tandem with the pi2-i2c snap from:
     https://github.com/zyga/snappy-pi2-i2c
 apps:
-    demo:
+    foreground:
         command: piglow
 parts:
     piglow:
