@@ -18,10 +18,10 @@ const char *argp_program_version = "piglow 2";
 
 /* Program documentation. */
 static char doc[] =
-"Argp example #3 -- a program with options and arguments using argp";
+"piglow -- example program using the piglow accessory on a Raspberry Pi 2";
 
 /* A description of the arguments we accept. */
-static char args_doc[] = "ARG1 ARG2";
+static char args_doc[] = "";
 
 /* The options we understand. */
 static struct argp_option options[] = {
