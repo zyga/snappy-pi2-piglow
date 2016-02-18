@@ -1,0 +1,9 @@
+Version 2:
+
+- The .demo command was replaced with the .foreground command.
+- A new .background command was added to run the "breathe" animation
+  in a never-ending loop.
+
+Version 1:
+
+- Initial release
