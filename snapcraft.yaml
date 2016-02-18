@@ -10,6 +10,9 @@ description: |
 apps:
     foreground:
         command: piglow
+    background:
+        command: piglow --forever --breathe
+        daemon: simple
 parts:
     piglow:
         plugin: make 
