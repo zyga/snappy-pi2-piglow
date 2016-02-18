@@ -8,9 +8,10 @@
 
 #include "piglow.h"
 
-sig_atomic_t shutdown = 0;
+volatile sig_atomic_t shutdown = 0;
 
-void on_sigint(int signo) {
+static void
+on_shutdown_signal(int signo) {
     shutdown = 1;
 }
 
@@ -92,7 +93,9 @@ int main(int argc, char **argv) {
         fprintf(stderr, "Cannot open piglow: %s\n", strerror(err));
         goto fail;
     }
-    signal(SIGINT, on_sigint);
+    signal(SIGINT, on_shutdown_signal);
+    signal(SIGTERM, on_shutdown_signal);
+    signal(SIGQUIT, on_shutdown_signal);
     // Initialize piglow
     printf("Resetting piglow\n");
     if ((err = piglow_reset(&glow))) {
