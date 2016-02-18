@@ -15,7 +15,7 @@ on_shutdown_signal(int signo) {
     shutdown = 1;
 }
 
-const char *argp_program_version = "piglow 2";
+const char *argp_program_version = "piglow 2.1";
 
 /* Program documentation. */
 static char doc[] =
